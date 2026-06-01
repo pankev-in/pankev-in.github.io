@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kevin Pan</title>
+  <meta name="description" content="Kevin Pan — Co-founder & CTO of Multus. Building biomanufacturing as an engineering discipline.">
+  <meta name="author" content="Kevin Pan">
+
+  <!-- Open Graph: what shows when the link is shared -->
+  <meta property="og:title" content="Kevin Pan">
+  <meta property="og:description" content="Building biomanufacturing as an engineering discipline — and thinking on a longer timescale than most.">
+  <meta property="og:type" content="website">
+
+  <!-- Minimal inline favicon so there's no 404 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='5' fill='%23c0a368'/></svg>">
+
+  <!-- Playfair Display (serif) + IBM Plex Mono (mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* Default: follow the visitor's system. The toggle sets an explicit override. */
+    :root {                          /* light — warm paper */
+      --bg:     #f3efe6;
+      --text:   #1f1c17;
+      --dim:    #6c655a;
+      --faint:  #8c8478;
+      --role:   #4b463d;
+      --link:   #2a2620;
+      --accent: #8c6e2d;
+      --rule:   rgba(31, 28, 23, 0.14);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) { --bg:#141210; --text:#ece7da; --dim:#837c6e; --faint:#6b6458; --role:#a59c8c; --link:#d8d2c4; --accent:#c0a368; --rule:rgba(236,231,218,0.13); }
+    }
+    :root[data-theme="dark"] { --bg:#141210; --text:#ece7da; --dim:#837c6e; --faint:#6b6458; --role:#a59c8c; --link:#d8d2c4; --accent:#c0a368; --rule:rgba(236,231,218,0.13); }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;        /* vertical center */
+      align-items: flex-start;        /* left aligned     */
+      padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 14vw, 18rem);
+    }
+
+    .wrap { max-width: 44rem; }
+
+    .name {
+      margin: 0;
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .headline {
+      margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3.4vw, 2.55rem);
+      line-height: 1.28;
+      color: var(--text);
+    }
+    .headline em { font-style: italic; color: var(--accent); }
+
+    .sub {
+      margin: clamp(1.5rem, 2.5vw, 2rem) 0 0;
+      max-width: 34ch;
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+      line-height: 1.45;
+      color: var(--dim);
+    }
+
+    .rule {
+      width: 100%;
+      height: 1px;
+      border: 0;
+      background: var(--rule);
+      margin: clamp(2.25rem, 4vw, 3.25rem) 0 0;
+    }
+
+    .meta {
+      margin: clamp(1.5rem, 2.5vw, 2rem) 0 0;
+      font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      color: var(--faint);
+    }
+    .meta .role { color: var(--role); }
+
+    .links {
+      margin: clamp(1.25rem, 2vw, 1.75rem) 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9rem;
+    }
+    .links a {
+      color: var(--link);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .links a:hover, .links a:focus-visible { color: var(--accent); }
+
+    .toggle {
+      position: fixed;
+      top: clamp(1.25rem, 3vw, 2rem);
+      right: clamp(1.25rem, 3vw, 2rem);
+      display: inline-flex;
+      padding: 0.4rem;
+      border: 0;
+      background: none;
+      color: var(--faint);
+      cursor: pointer;
+      line-height: 0;
+      transition: color 0.3s ease;
+    }
+    .toggle:hover, .toggle:focus-visible { color: var(--text); }
+    .toggle svg { display: block; }
+
+    /* Gentle staggered entrance */
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .name, .headline, .sub, .rule, .meta, .links {
+      opacity: 0;
+      animation: rise 1.1s cubic-bezier(.2,.6,.2,1) forwards;
+    }
+    .name     { animation-delay: 0.05s; }
+    .headline { animation-delay: 0.18s; }
+    .sub      { animation-delay: 0.30s; }
+    .rule     { animation-delay: 0.42s; }
+    .meta     { animation-delay: 0.50s; }
+    .links    { animation-delay: 0.58s; }
+    @media (prefers-reduced-motion: reduce) {
+      .name, .headline, .sub, .rule, .meta, .links { animation: none; opacity: 1; }
+    }
+  </style>
+
+  <!-- Apply a saved theme choice before paint to avoid a flash -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+  <button class="toggle" type="button" aria-label="Toggle light or dark mode" title="Toggle light / dark">
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <main class="wrap">
+    <h1 class="name">Kevin Pan</h1>
+    <p class="headline">Building biomanufacturing as an <em>engineering discipline</em> — and thinking on a longer timescale than most.</p>
+    <p class="sub">Redesigning cell culture media for better human and planetary health.</p>
+    <hr class="rule">
+    <p class="meta"><span class="role">Co-founder &amp; CTO</span> @ Multus &middot; London</p>
+    <nav class="links">
+      <a href="https://multus.bio">Multus</a>
+      <a href="https://www.linkedin.com/in/pankevin">LinkedIn</a>
+      <a href="mailto:kevin.pan@multus.bio">Email</a>
+    </nav>
+  </main>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector('.toggle');
+      function effective() {
+        return root.dataset.theme ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      }
+      btn.addEventListener('click', function () {
+        var next = effective() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    })();
+  </script>
+</body>
+</html>
